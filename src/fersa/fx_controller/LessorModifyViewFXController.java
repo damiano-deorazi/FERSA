@@ -73,10 +73,7 @@ public class LessorModifyViewFXController extends RenterModifyViewFXController {
 
     public void loadPreviousScreen() throws IOException {
         Stage stage = (Stage) btnConfirm.getScene().getWindow();
-        LessorVisitsListViewFXController controller = new LessorVisitsListViewFXController();
-        controller.initData(1);
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/lessor_visits_list_view.fxml"));
-        loader.setController(controller);
         AnchorPane root = loader.load();
         Scene scene = new Scene(root);
         stage.setScene(scene);

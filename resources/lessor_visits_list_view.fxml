@@ -6,17 +6,16 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.172-ea"
-            xmlns:fx="http://javafx.com/fxml/1">
-    <Button fx:id="btnLogout" layoutX="526.0" layoutY="7.0" mnemonicParsing="false" text="Logout" />
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.999-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fersa.fx_controller.LessorVisitsListViewFXController">
+    <Button fx:id="btnLogout" layoutX="526.0" layoutY="7.0" mnemonicParsing="false" onAction="#onBtnLogoutClicked" text="Logout" />
     <ListView fx:id="lvApartments" layoutX="7.0" layoutY="40.0" prefHeight="311.0" prefWidth="586.0" />
-    <Button fx:id="btnAction" layoutX="508.0" layoutY="360.0" mnemonicParsing="false" />
-    <Button fx:id="btnBack" layoutX="7.0" layoutY="360.0" mnemonicParsing="false" text="Indietro" />
-    <Label fx:id="lbEmptyList" layoutX="149.0" layoutY="151.0" prefHeight="89.0" prefWidth="303.0"
-           text="Non sono presenti al momento visite prenotate!" textAlignment="CENTER" wrapText="true">
+    <Button fx:id="btnDelete" layoutX="508.0" layoutY="360.0" mnemonicParsing="false" onAction="#onBtnDeleteClicked" text="Cancella" />
+    <Button fx:id="btnBack" layoutX="7.0" layoutY="360.0" mnemonicParsing="false" onAction="#onBtnBackClicked" text="Indietro" />
+    <Label fx:id="lbEmptyList" layoutX="149.0" layoutY="151.0" prefHeight="89.0" prefWidth="303.0" text="Non sono presenti al momento visite prenotate!" textAlignment="CENTER" wrapText="true">
         <font>
             <Font name="System Bold" size="18.0" />
         </font>
     </Label>
+   <Button fx:id="btnModify" layoutX="426.0" layoutY="360.0" mnemonicParsing="false" onAction="#onBtnModifyClicked" text="Modifica" />
+   <Label layoutX="7.0" layoutY="20.0" text="Doppio click per mostrare i dettagli" />
 </AnchorPane>

@@ -29,12 +29,12 @@ public class RenterVisitsListViewFXController implements Initializable {
     @FXML
     ListView lvApartments;
     @FXML
-    Button btnLogout, btnAction, btnBack;
+    Button btnLogout, btnDelete, btnModify;
     @FXML
     Label lbEmptyList;
 
     private Preferences preferences;
-    private int infoBit;
+    //private int infoBit;
     private VisitBean visitBean;
     private ArrayList<ApartmentRenterVisit> apartmentRenterVisits;
     private DeleteVisitController controller = DeleteVisitController.getInstance();
@@ -42,16 +42,16 @@ public class RenterVisitsListViewFXController implements Initializable {
     public RenterVisitsListViewFXController() {}
 
     /**utile per settare il bottone su cancella o modifica**/
-    public void initData(int i){
+    /*public void initData(int i){
         infoBit = i;
-    }
+    }*/
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         preferences = Preferences.userRoot().node("/fersa/cache");
         String username = preferences.get("username", null);
-        setLogoutAction();
-        setButtonActions();
+        /*setLogoutAction();
+        setButtonActions();*/
         visitBean = new VisitBean();
         visitBean.setUsernameRenter(username);
         visitBean.setTodayDate(LocalDate.now());
@@ -59,7 +59,8 @@ public class RenterVisitsListViewFXController implements Initializable {
         visitBean.setLessor(false);
         apartmentRenterVisits = controller.searchApartmentsByRenter(visitBean);
         if (apartmentRenterVisits == null){
-            btnAction.setVisible(false);
+            btnDelete.setVisible(false);
+            btnModify.setVisible(false);
             lvApartments.setVisible(false);
         }
         else {
@@ -69,14 +70,14 @@ public class RenterVisitsListViewFXController implements Initializable {
     }
 
     /**modifica la visita selezionata dal renter**/
-    private void onBtnModifyClicked() throws IOException {
+    public void onBtnModifyClicked() throws IOException {
         ApartmentRenterVisit apartmentRenterVisit = (ApartmentRenterVisit) lvApartments.getSelectionModel().
                 getSelectedItem();
         int idApartment = apartmentRenterVisit.getId();
         String usernameLessor = apartmentRenterVisit.getUsernameLessor();
         LocalDate date = apartmentRenterVisit.getDateVisit();
         LocalTime time = apartmentRenterVisit.getTimeVisit();
-        Stage stage = (Stage) btnAction.getScene().getWindow();
+        Stage stage = (Stage) btnModify.getScene().getWindow();
         RenterModifyViewFXController controller = new RenterModifyViewFXController();
         controller.initData(usernameLessor, idApartment, date, time);
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/renter_modify_view.fxml"));
@@ -88,7 +89,7 @@ public class RenterVisitsListViewFXController implements Initializable {
     }
 
     /**cancella la visita selezionata dal renter**/
-    private void onBtnDeleteClicked() {
+    public void onBtnDeleteClicked() {
         Popup popup = new Popup();
         if (popup.showConfirmPopup("Vuoi davvero cancellare la visita?")) {
             ApartmentRenterVisit apartmentRenterVisit = (ApartmentRenterVisit) lvApartments.getSelectionModel().
@@ -111,7 +112,8 @@ public class RenterVisitsListViewFXController implements Initializable {
                     loadListView();
                 } else {
                     lvApartments.setVisible(false);
-                    btnAction.setVisible(false);
+                    btnDelete.setVisible(false);
+                    btnModify.setVisible(false);
                     lbEmptyList.setVisible(true);
                 }
             } else {
@@ -120,18 +122,18 @@ public class RenterVisitsListViewFXController implements Initializable {
         }
     }
 
-    private void onBtnBackClicked() throws IOException {
+    /*public void onBtnBackClicked() throws IOException {
         Stage stage = (Stage) btnBack.getScene().getWindow();
         loadNewScreen(stage, "/renter_opt_view.fxml");
-    }
+    }*/
 
-    private void onBtnLogoutClicked() throws BackingStoreException, IOException {
+    public void onBtnLogoutClicked() throws BackingStoreException, IOException {
         preferences.clear();
         Stage stage = (Stage) btnLogout.getScene().getWindow();
         loadNewScreen(stage, "/login_view.fxml");
     }
 
-    private void setLogoutAction(){
+    /*private void setLogoutAction(){
         btnLogout.setOnAction(e -> {
             try {
                 onBtnLogoutClicked();
@@ -164,7 +166,7 @@ public class RenterVisitsListViewFXController implements Initializable {
                 e1.printStackTrace();
             }
         });
-    }
+    }*/
 
     private void loadListView(){
         ObservableList observableList = FXCollections.observableArrayList();

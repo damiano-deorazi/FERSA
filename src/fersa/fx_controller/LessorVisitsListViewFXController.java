@@ -29,12 +29,12 @@ public class LessorVisitsListViewFXController implements Initializable {
     @FXML
     ListView lvApartments;
     @FXML
-    Button btnLogout, btnAction, btnBack;
+    Button btnLogout, btnModify, btnDelete, btnBack;
     @FXML
     Label lbEmptyList;
 
     private Preferences preferences;
-    private int infoBit;
+    //private int infoBit;
     private VisitBean visitBean;
     private ArrayList<ApartmentLessorVisit> lessorApartments;
     private DeleteVisitController controller = DeleteVisitController.getInstance();
@@ -42,16 +42,16 @@ public class LessorVisitsListViewFXController implements Initializable {
     public LessorVisitsListViewFXController() {}
 
     /**utile per settare il bottone su cancella o modifica**/
-    public void initData(int i){
+    /*public void initData(int i){
         infoBit = i;
-    }
+    }*/
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         preferences = Preferences.userRoot().node("/fersa/cache");
         String username = preferences.get("username", null);
-        setLogoutAction();
-        setButtonActions();
+        /*setLogoutAction();
+        setButtonActions();*/
         visitBean = new VisitBean();
         visitBean.setUsernameLessor(username);
         visitBean.setTodayDate(LocalDate.now());
@@ -59,7 +59,8 @@ public class LessorVisitsListViewFXController implements Initializable {
         visitBean.setLessor(true);
         lessorApartments = controller.searchApartmentsByLessor(visitBean);
         if (lessorApartments == null){
-            btnAction.setVisible(false);
+            btnDelete.setVisible(false);
+            btnModify.setVisible(false);
             lvApartments.setVisible(false);
         }
         else {
@@ -69,14 +70,14 @@ public class LessorVisitsListViewFXController implements Initializable {
     }
 
     /**modifica la visita selezionata dal lessor**/
-    private void onBtnModifyClicked() throws IOException {
+    public void onBtnModifyClicked() throws IOException {
         ApartmentLessorVisit apartment = (ApartmentLessorVisit) lvApartments.getSelectionModel().getSelectedItem();
         int id = apartment.getId();
         LocalDate date = apartment.getDateVisit();
         LocalTime time = apartment.getTimeVisit();
         String usernameRenter = apartment.getUsernameRenterVisit();
         String usernameLessor = visitBean.getUsernameLessor();
-        Stage stage = (Stage) btnAction.getScene().getWindow();
+        Stage stage = (Stage) btnDelete.getScene().getWindow();
         LessorModifyViewFXController controller = new LessorModifyViewFXController();
         controller.initData(usernameLessor, id, date, time, usernameRenter);
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/lessor_modify_view.fxml"));
@@ -88,7 +89,7 @@ public class LessorVisitsListViewFXController implements Initializable {
     }
 
     /**cancella la visita selezionata dal lessor**/
-    private void onBtnDeleteClicked(){
+    public void onBtnDeleteClicked(){
         Popup popup = new Popup();
         if (popup.showConfirmPopup("Vuoi davvero cancellare la visita?")) {
 
@@ -115,7 +116,8 @@ public class LessorVisitsListViewFXController implements Initializable {
                     loadListView();
                 } else {
                     lvApartments.setVisible(false);
-                    btnAction.setVisible(false);
+                    btnDelete.setVisible(false);
+                    btnModify.setVisible(false);
                     lbEmptyList.setVisible(true);
                 }
             } else {
@@ -124,18 +126,18 @@ public class LessorVisitsListViewFXController implements Initializable {
         }
     }
 
-    private void onBtnBackClicked() throws IOException {
+    public void onBtnBackClicked() throws IOException {
         Stage stage = (Stage) btnBack.getScene().getWindow();
         loadNewScreen(stage, "/lessor_opt_view.fxml");
     }
 
-    private void onBtnLogoutClicked() throws BackingStoreException, IOException {
+    public void onBtnLogoutClicked() throws BackingStoreException, IOException {
         preferences.clear();
         Stage stage = (Stage) btnLogout.getScene().getWindow();
         loadNewScreen(stage, "/login_view.fxml");
     }
 
-    private void setLogoutAction(){
+    /*private void setLogoutAction(){
         btnLogout.setOnAction(e -> {
             try {
                 onBtnLogoutClicked();
@@ -169,7 +171,7 @@ public class LessorVisitsListViewFXController implements Initializable {
             }
         });
     }
-
+*/
     private void loadNewScreen(Stage stage, String fxmlFile) throws IOException {
         AnchorPane root = FXMLLoader.load(getClass().getResource(fxmlFile));
         Scene scene = new Scene(root);

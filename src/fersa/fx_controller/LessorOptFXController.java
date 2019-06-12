@@ -14,9 +14,7 @@ import java.util.prefs.Preferences;
 
 public class LessorOptFXController{
     @FXML
-    Button btnAccept;
-    @FXML
-    Button btnDelete, btnModify, btnLogout;
+    Button btnManageVisits, btnManageRequests, btnLogout;
     @FXML
     Label lbWelcomeUser;
     private Preferences preferences;
@@ -28,12 +26,12 @@ public class LessorOptFXController{
         lbWelcomeUser.setText("Benvenuto " + username + "!");
     }
 
-    public void onBtnDeleteClicked() throws IOException {
-        setLessorViewController(0);
+    public void onBtnManageVisitsClicked() throws IOException {
+        loadNewScreen("/lessor_visits_list_view.fxml");
     }
 
-    public void onBtnModifyClicked() throws IOException {
-        setLessorViewController(1);
+    public void onBtnManageRequestsClicked() throws IOException {
+        loadNewScreen("/maintenance_list_view.fxml");
     }
 
     public void onBtnLogoutClicked() throws BackingStoreException, IOException {
@@ -45,16 +43,15 @@ public class LessorOptFXController{
         stage.show();
     }
 
-    public void onBtnAcceptClicked() throws IOException {
-        Stage stage = (Stage) btnDelete.getScene().getWindow();
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/maintenance_list_view.fxml"));
-        AnchorPane root = loader.load();
+    private void loadNewScreen(String fxmlFile) throws IOException {
+        Stage stage = (Stage) btnLogout.getScene().getWindow();
+        AnchorPane root = FXMLLoader.load(getClass().getResource(fxmlFile));
         Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
     }
 
-    private void setLessorViewController(int i) throws IOException {
+    /*private void setLessorViewController(int i) throws IOException {
         Stage stage = (Stage) btnDelete.getScene().getWindow();
         LessorVisitsListViewFXController controller = new LessorVisitsListViewFXController();
         controller.initData(i);
@@ -64,5 +61,5 @@ public class LessorOptFXController{
         Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
-    }
+    }*/
 }

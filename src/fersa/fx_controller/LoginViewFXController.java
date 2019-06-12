@@ -40,14 +40,13 @@ public class LoginViewFXController {
             if (userController.validateLogin(userBean)){
                 Preferences preferences = Preferences.userRoot().node("fersa/cache");
                 preferences.put("username", username); /*forse da rimuovere e chiedere direttamenteal db*/
-                //preferences.put("cf", userBean.getUser().getCF());
                 if (userBean.isLessor()) {
                     preferences.put("isLessor", "1"); /*idem come sopra*/
                     loadNewScreen("/lessor_opt_view.fxml");
                 }
                 else {
                     preferences.put("isLessor", "0");
-                    loadNewScreen("/renter_opt_view.fxml");
+                    loadNewScreen("/renter_visits_list_view.fxml");
                 }
             }
             else {

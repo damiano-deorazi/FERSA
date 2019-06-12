@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="401.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fersa.fx_controller.MaintenanceListViewFXController">
+<AnchorPane prefHeight="401.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.999-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fersa.fx_controller.MaintenanceListViewFXController">
    <children>
       <ListView fx:id="lvApartments" layoutX="7.0" layoutY="47.0" prefHeight="311.0" prefWidth="587.0" />
       <Button fx:id="btnReject" layoutX="449.0" layoutY="360.0" mnemonicParsing="false" onAction="#onBtnRejectClicked" prefHeight="26.0" prefWidth="68.0" text="Rifiuta" />
@@ -18,6 +18,5 @@
             <Font name="System Bold" size="18.0" />
          </font>
       </Label>
-      <Label fx:id="lbDClickInfo" layoutX="7.0" layoutY="27.0" text="Doppio click per mostare i dettagli" />
    </children>
 </AnchorPane>
