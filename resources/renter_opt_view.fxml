@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fersa.fx_controller.RenterOptFXController">
+   <children>
+      <Button fx:id="btnDelete" layoutX="244.0" layoutY="138.0" mnemonicParsing="false" onAction="#onBtnDeleteClicked" text="Cancella visita" />
+      <Button fx:id="btnModify" layoutX="244.0" layoutY="206.0" mnemonicParsing="false" onAction="#onBtnModifyClicked" text="Modifica visita" />
+      <Button fx:id="btnLogout" layoutX="507.0" layoutY="341.0" mnemonicParsing="false" onAction="#onBtnLogoutClicked" text="Logout" />
+      <Label fx:id="lbWelcomeUser" layoutX="380.0" layoutY="25.0" prefHeight="35.0" prefWidth="190.0" />
+   </children>
+</AnchorPane>

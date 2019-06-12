@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox fx:id="vbxItemList" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="87.0" prefWidth="622.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1">
+   <HBox prefHeight="36.0" prefWidth="562.0">
+      <Label prefHeight="36.0" prefWidth="20.0" text="ID:" />
+      <Label fx:id="lbID" prefHeight="36.0" prefWidth="45.0" />
+      <Label prefHeight="31.0" prefWidth="137.0" text="Username Locatore:" />
+      <Label fx:id="lbUsernameLessor" prefHeight="31.0" prefWidth="235.0" />
+   </HBox>
+   <HBox prefHeight="27.0" prefWidth="586.0">
+      <Label prefHeight="22.0" prefWidth="63.0" text="Indirizzo:" />
+      <Label fx:id="lbAddress" prefHeight="22.0" prefWidth="131.0" />
+      <Label prefHeight="35.0" prefWidth="42.0" text="Città:" />
+      <Label fx:id="lbCity" prefHeight="35.0" prefWidth="88.0" />
+      <Label prefHeight="35.0" prefWidth="48.0" text="Paese:" />
+      <Label fx:id="lbCountry" prefHeight="35.0" prefWidth="82.0" />
+   </HBox>
+   <HBox prefHeight="39.0" prefWidth="562.0">
+      <Label prefHeight="39.0" prefWidth="105.0" text="Data/ora visita:" />
+      <Label fx:id="lbDate" prefHeight="39.0" prefWidth="95.0" />
+      <Label fx:id="lbTime" prefHeight="39.0" prefWidth="56.0" />
+   </HBox>
+</VBox>
