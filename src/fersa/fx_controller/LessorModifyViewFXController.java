@@ -1,7 +1,6 @@
 package fersa.fx_controller;
 
 import fersa.Popup;
-import fersa.bean.VisitBean;
 import fersa.grasp_controller.ModifyVisitController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;

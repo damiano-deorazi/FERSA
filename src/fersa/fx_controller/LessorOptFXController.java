@@ -50,16 +50,4 @@ public class LessorOptFXController{
         stage.setScene(scene);
         stage.show();
     }
-
-    /*private void setLessorViewController(int i) throws IOException {
-        Stage stage = (Stage) btnDelete.getScene().getWindow();
-        LessorVisitsListViewFXController controller = new LessorVisitsListViewFXController();
-        controller.initData(i);
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/lessor_visits_list_view.fxml"));
-        loader.setController(controller);
-        AnchorPane root = loader.load();
-        Scene scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
-    }*/
 }

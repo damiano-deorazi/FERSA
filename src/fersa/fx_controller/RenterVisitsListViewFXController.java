@@ -41,17 +41,10 @@ public class RenterVisitsListViewFXController implements Initializable {
 
     public RenterVisitsListViewFXController() {}
 
-    /**utile per settare il bottone su cancella o modifica**/
-    /*public void initData(int i){
-        infoBit = i;
-    }*/
-
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         preferences = Preferences.userRoot().node("/fersa/cache");
         String username = preferences.get("username", null);
-        /*setLogoutAction();
-        setButtonActions();*/
         visitBean = new VisitBean();
         visitBean.setUsernameRenter(username);
         visitBean.setTodayDate(LocalDate.now());
@@ -122,51 +115,11 @@ public class RenterVisitsListViewFXController implements Initializable {
         }
     }
 
-    /*public void onBtnBackClicked() throws IOException {
-        Stage stage = (Stage) btnBack.getScene().getWindow();
-        loadNewScreen(stage, "/renter_opt_view.fxml");
-    }*/
-
     public void onBtnLogoutClicked() throws BackingStoreException, IOException {
         preferences.clear();
         Stage stage = (Stage) btnLogout.getScene().getWindow();
         loadNewScreen(stage, "/login_view.fxml");
     }
-
-    /*private void setLogoutAction(){
-        btnLogout.setOnAction(e -> {
-            try {
-                onBtnLogoutClicked();
-            } catch (BackingStoreException | IOException e1) {
-                e1.printStackTrace();
-            }
-        });
-    }
-
-    private void setButtonActions(){
-        if (infoBit == 0){
-            btnAction.setText("Cancella");
-            btnAction.setOnAction(e -> onBtnDeleteClicked());
-        }
-        else {
-            btnAction.setText("Modifica");
-            btnAction.setOnAction(e -> {
-                try {
-                    onBtnModifyClicked();
-                } catch (IOException e1) {
-                    e1.printStackTrace();
-                }
-            });
-        }
-
-        btnBack.setOnAction(e -> {
-            try {
-                onBtnBackClicked();
-            } catch (IOException e1) {
-                e1.printStackTrace();
-            }
-        });
-    }*/
 
     private void loadListView(){
         ObservableList observableList = FXCollections.observableArrayList();

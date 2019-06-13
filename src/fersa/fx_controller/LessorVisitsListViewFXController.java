@@ -34,24 +34,16 @@ public class LessorVisitsListViewFXController implements Initializable {
     Label lbEmptyList;
 
     private Preferences preferences;
-    //private int infoBit;
     private VisitBean visitBean;
     private ArrayList<ApartmentLessorVisit> lessorApartments;
     private DeleteVisitController controller = DeleteVisitController.getInstance();
 
     public LessorVisitsListViewFXController() {}
 
-    /**utile per settare il bottone su cancella o modifica**/
-    /*public void initData(int i){
-        infoBit = i;
-    }*/
-
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         preferences = Preferences.userRoot().node("/fersa/cache");
         String username = preferences.get("username", null);
-        /*setLogoutAction();
-        setButtonActions();*/
         visitBean = new VisitBean();
         visitBean.setUsernameLessor(username);
         visitBean.setTodayDate(LocalDate.now());
@@ -137,41 +129,7 @@ public class LessorVisitsListViewFXController implements Initializable {
         loadNewScreen(stage, "/login_view.fxml");
     }
 
-    /*private void setLogoutAction(){
-        btnLogout.setOnAction(e -> {
-            try {
-                onBtnLogoutClicked();
-            } catch (BackingStoreException | IOException e1) {
-                e1.printStackTrace();
-            }
-        });
-    }
 
-    private void setButtonActions() {
-        if (infoBit == 0){
-            btnAction.setText("Cancella");
-            btnAction.setOnAction(e -> onBtnDeleteClicked());
-        }
-        else {
-            btnAction.setText("Modifica");
-            btnAction.setOnAction(e -> {
-                try {
-                    onBtnModifyClicked();
-                } catch (IOException e1) {
-                    e1.printStackTrace();
-                }
-            });
-        }
-
-        btnBack.setOnAction(e -> {
-            try {
-                onBtnBackClicked();
-            } catch (IOException e1) {
-                e1.printStackTrace();
-            }
-        });
-    }
-*/
     private void loadNewScreen(Stage stage, String fxmlFile) throws IOException {
         AnchorPane root = FXMLLoader.load(getClass().getResource(fxmlFile));
         Scene scene = new Scene(root);
