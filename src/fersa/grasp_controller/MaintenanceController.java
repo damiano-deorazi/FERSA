@@ -1,5 +1,6 @@
 package fersa.grasp_controller;
 
+import fersa.MailMaintenanceThread;
 import fersa.Mailer;
 import fersa.bean.MaintenanceBean;
 import fersa.dao.DAOQueryMaintenanceRequest;
@@ -30,12 +31,14 @@ public class MaintenanceController {
         if(daoQueryMaintenanceRequest.acceptOrRejectMaintenanceRequest(maintenanceBean.getIdMaintenanceReq(),
                 maintenanceBean.isAccepted())){
             DAOQueryUser daoQueryUser = DAOQueryUser.getInstance();
-            Mailer mailer = Mailer.getInstance();
+            //Mailer mailer = Mailer.getInstance();
             String emailLessor = daoQueryUser.getEmail(maintenanceBean.getUsernameLessor());
             String emailRenter = daoQueryUser.getEmail(maintenanceBean.getUsernameRenter());
-            mailer.sendMaintenanceReqRespondEmail(emailLessor, emailRenter, maintenanceBean.getUsernameLessor(),
-                    maintenanceBean.getIdApartment(), maintenanceBean.getRequestDate(),
-                    maintenanceBean.getRequestTime(), maintenanceBean.isAccepted());
+            MailMaintenanceThread t = new MailMaintenanceThread(emailLessor, emailRenter,
+                    maintenanceBean.getUsernameLessor(), maintenanceBean.getIdApartment(),
+                    maintenanceBean.getRequestDate(), maintenanceBean.getRequestTime(), maintenanceBean.isAccepted());
+            Thread thread = new Thread(t);
+            thread.start();
             return  true;
         }
         return  false;

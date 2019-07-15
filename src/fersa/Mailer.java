@@ -9,10 +9,8 @@ import java.util.Properties;
 public class Mailer {
     private static Mailer mailer_instance;
     private Session session;
-    private Popup popup;
 
     private Mailer() {
-        popup = new Popup();
         Properties prop = new Properties();
         prop.put("mail.smtp.auth", true);
         prop.put("mail.smtp.starttls.enable", "true");
@@ -69,11 +67,9 @@ public class Mailer {
             message.setRecipients(
                     Message.RecipientType.TO, InternetAddress.parse(emailReceiver));
             message.setSubject("Avviso cancellazione visita");
-
             sendMessage(message, msg);
         } catch (MessagingException e){
             e.printStackTrace();
-            popup.showEmailErrorPopup();
             sendDeleteVisitEmail(emailSender, emailReceiver, usernameSender, idApartment, date, time, senderIsLessor);
         }
     }
@@ -103,7 +99,7 @@ public class Mailer {
             sendMessage(message, msg);
         } catch (MessagingException e) {
             e.printStackTrace();
-            popup.showEmailErrorPopup();
+            //popup.showEmailErrorPopup();
             sendModifyVisitEmail(emailSender, emailReceiver, usernameSender, idApartment, dateVisit, timeVisit, modDate,
                     modTime, senderIsLessor);
         }
@@ -133,7 +129,6 @@ public class Mailer {
             sendMessage(message, msg);
         }  catch (MessagingException e) {
             e.printStackTrace();
-            popup.showEmailErrorPopup();
             sendMaintenanceReqRespondEmail(emailSender, emailReceiver, usernameSender, apartmentId, dateRequest,
                     timeRequest, isAccepted);
         }

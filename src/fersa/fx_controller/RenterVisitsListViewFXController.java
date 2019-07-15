@@ -1,7 +1,5 @@
 package fersa.fx_controller;
 
-import fersa.CustomListCellRenter;
-import fersa.Popup;
 import fersa.bean.VisitBean;
 import fersa.grasp_controller.DeleteVisitController;
 import fersa.model.ApartmentRenterVisit;
@@ -88,7 +86,11 @@ public class RenterVisitsListViewFXController implements Initializable {
             ApartmentRenterVisit apartmentRenterVisit = (ApartmentRenterVisit) lvApartments.getSelectionModel().
                     getSelectedItem();
             int apartmentId = apartmentRenterVisit.getId();
+            String usernameLessor = apartmentRenterVisit.getUsernameLessor();
             visitBean.setIdApartment(apartmentId);
+            visitBean.setVisitDate(apartmentRenterVisit.getDateVisit());
+            visitBean.setVisitTime(apartmentRenterVisit.getTimeVisit());
+            visitBean.setUsernameLessor(usernameLessor);
 
             if (controller.deleteVisit(visitBean)) {
                 popup.showInfoPopup("Visita cancellata!", "Un'mail di conferma è stata inviata " +

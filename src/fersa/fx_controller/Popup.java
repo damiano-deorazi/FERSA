@@ -1,4 +1,4 @@
-package fersa;
+package fersa.fx_controller;
 
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;

@@ -1,4 +1,4 @@
-package fersa;
+package fersa.fx_controller;
 
 import fersa.fx_controller.CustomListCellLessorFXController;
 import fersa.model.ApartmentLessorVisit;

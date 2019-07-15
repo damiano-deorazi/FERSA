@@ -1,5 +1,6 @@
 package fersa.grasp_controller;
 
+import fersa.MailDeleteVisitThread;
 import fersa.Mailer;
 import fersa.bean.VisitBean;
 import fersa.dao.DAOQueryApartment;
@@ -49,18 +50,21 @@ public class DeleteVisitController {
         DAOQueryVisit daoQueryVisit = DAOQueryVisit.getInstance();
         if (daoQueryVisit.deleteVisit(visitBean.getUsernameRenter() , visitBean.getIdApartment())){
             DAOQueryUser daoQueryUser = DAOQueryUser.getInstance();
-            Mailer mailer = Mailer.getInstance();
+            //Mailer mailer = Mailer.getInstance();
             String emailRenter = daoQueryUser.getEmail(visitBean.getUsernameRenter());
             String emailLessor = daoQueryUser.getEmail(visitBean.getUsernameLessor());
             if (visitBean.isLessor()) {
-                mailer.sendDeleteVisitEmail(emailLessor, emailRenter, visitBean.getUsernameLessor(),
-                        visitBean.getIdApartment(), visitBean.getVisitDate(), visitBean.getVisitTime(),
-                        true);
-            }
-            else{
-                mailer.sendDeleteVisitEmail(emailRenter, emailLessor, visitBean.getUsernameRenter(),
-                        visitBean.getIdApartment(), visitBean.getVisitDate(), visitBean.getVisitTime(),
-                        false);
+                MailDeleteVisitThread t = new MailDeleteVisitThread(emailLessor, emailRenter,
+                        visitBean.getUsernameLessor(), visitBean.getIdApartment(), visitBean.getVisitDate(),
+                        visitBean.getVisitTime(), true);
+                Thread thread = new Thread(t);
+                thread.start();
+            } else {
+                MailDeleteVisitThread t = new MailDeleteVisitThread(emailRenter, emailLessor,
+                        visitBean.getUsernameRenter(), visitBean.getIdApartment(), visitBean.getVisitDate(),
+                        visitBean.getVisitTime(), false);
+                Thread thread = new Thread(t);
+                thread.start();
             }
             return true;
         }

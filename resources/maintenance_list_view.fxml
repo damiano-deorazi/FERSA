@@ -18,5 +18,6 @@
             <Font name="System Bold" size="18.0" />
          </font>
       </Label>
+      <Label fx:id="lbDClickInfo" layoutX="14.0" layoutY="19.0" text="Doppio click per mostrare i dettagli" />
    </children>
 </AnchorPane>

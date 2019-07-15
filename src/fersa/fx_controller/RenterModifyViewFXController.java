@@ -1,6 +1,5 @@
 package fersa.fx_controller;
 
-import fersa.Popup;
 import fersa.bean.VisitBean;
 import fersa.grasp_controller.ModifyVisitController;
 import javafx.collections.FXCollections;
@@ -37,7 +36,7 @@ public class RenterModifyViewFXController implements Initializable {
     private LocalTime now = LocalTime.now();
     private ModifyVisitController controller = ModifyVisitController.getInstance();
     protected String[] timetable = {"08:00", "08:30", "09:00", "09:30", "10:00", "10:30", "11:00", "11:30", "12:00",
-            "12:30", "13:00", "13:30", "14:00", "14:30", "15:00", "15:30", "16:30", "17:00", "17:30", "18:00", "18:30",
+            "12:30", "13:00", "13:30", "14:00", "14:30", "15:00", "15:30", "16:00", "16:30", "17:00", "17:30", "18:00", "18:30",
             "19:00"};
 
     public void initData(String usernameLessor, int id, LocalDate date, LocalTime time) {
@@ -88,25 +87,19 @@ public class RenterModifyViewFXController implements Initializable {
                 /*ciò vale per il renter e non il lessor perche l'username del lessor non è utile per trovare le visite*/
                 Preferences preferences = Preferences.userRoot().node("fersa/cache");
                 String usernameRenter = preferences.get("username", null);
-                int m = modifyVisit(modDate, modTime, usernameRenter, false, controller);
-
-                if (m == 1) {
-                    /*TODO da ricontrollare il riuso del codice e il metodo dello UserBean*/
+                if (modifyVisit(modDate, modTime, usernameRenter, false, controller)){
                     popup.showInfoPopup("Modifica confermata!", "Un'email di conferma è stata " +
                             "inviata al locatore");
                     loadPreviousScreen();
-                } else if (m == 0) {
-                    popup.showInfoPopup("Errore nella modifica della visita!", null);
-                } else if (m == -1) {
+                } else {
                     popup.showInfoPopup("Data selezionata non disponibile!", "Esiste un'altra " +
                             "prenotazione per la data selezionata");
-
                 }
             }
         }
     }
 
-    protected int modifyVisit(LocalDate modDate, LocalTime modTime, String usernameRenter, boolean isLessor,
+    protected boolean modifyVisit(LocalDate modDate, LocalTime modTime, String usernameRenter, boolean isLessor,
                               ModifyVisitController controller) {
         VisitBean visitBean = new VisitBean();
         visitBean.setIdApartment(idApartment);

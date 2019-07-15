@@ -1,6 +1,5 @@
 package fersa.fx_controller;
 
-import fersa.Popup;
 import fersa.grasp_controller.ModifyVisitController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -54,15 +53,11 @@ public class LessorModifyViewFXController extends RenterModifyViewFXController {
                         "ora inseriti");
             } else {
                 /*ciò vale per il renter e non il lessor perche il cf del lessor non è utile per trovare le visite*/
-                int m = modifyVisit(modDate, modTime, usernameRenter, true, controller);
-
-                if (m == 1) {
+                if(modifyVisit(modDate, modTime, usernameRenter, true, controller)){
                     popup.showInfoPopup("Modifica confermata!", "Un'email di conferma è stata " +
                             "inviata al locatorario");
                     loadPreviousScreen();
-                } else if (m == 0) {
-                    popup.showInfoPopup("Errore nella modifica della visita!", null);
-                } else if (m == -1) {
+                } else {
                     popup.showInfoPopup("Data selezionata non disponibile!", "Esiste un'altra " +
                             "prenotazione per la data selezionata");
                 }

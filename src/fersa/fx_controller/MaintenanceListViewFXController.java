@@ -1,7 +1,5 @@
 package fersa.fx_controller;
 
-import fersa.CustomListCellMaintenance;
-import fersa.Popup;
 import fersa.bean.MaintenanceBean;
 import fersa.grasp_controller.MaintenanceController;
 import fersa.model.MaintenanceRequest;

@@ -1,4 +1,4 @@
-package fersa;
+package fersa.fx_controller;
 
 import fersa.fx_controller.CustomListCellMaintenaceFXController;
 import fersa.model.MaintenanceRequest;

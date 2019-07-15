@@ -1,5 +1,6 @@
 package fersa.grasp_controller;
 
+import fersa.MailModifyVisitThread;
 import fersa.Mailer;
 import fersa.bean.VisitBean;
 import fersa.dao.DAOQueryUser;
@@ -18,7 +19,7 @@ public class ModifyVisitController {
         return modifyVisitController;
     }
 
-    public int modifyVisit(VisitBean visitBean) {
+    public boolean modifyVisit(VisitBean visitBean) {
         DAOQueryVisit daoQueryVisit = DAOQueryVisit.getInstance();
         int visits = daoQueryVisit.getVisitByIdAndTime(visitBean.getIdApartment(), visitBean.getModDate(),
                 visitBean.getModTime());
@@ -26,22 +27,26 @@ public class ModifyVisitController {
             if (daoQueryVisit.modifyVisit(visitBean.getUsernameRenter(), visitBean.getIdApartment(),
                     visitBean.getModDate(), visitBean.getModTime())){
                 DAOQueryUser daoQueryUser = DAOQueryUser.getInstance();
-                Mailer mailer = Mailer.getInstance();
+                //Mailer mailer = Mailer.getInstance();
                 String emailRenter = daoQueryUser.getEmail(visitBean.getUsernameRenter());
                 String emailLessor = daoQueryUser.getEmail(visitBean.getUsernameLessor());
                 if (visitBean.isLessor()) {
-                    mailer.sendModifyVisitEmail(emailLessor, emailRenter, visitBean.getUsernameLessor(),
-                            visitBean.getIdApartment(), visitBean.getVisitDate(), visitBean.getVisitTime(),
-                            visitBean.getModDate(), visitBean.getModTime(), true);
+                    MailModifyVisitThread t = new MailModifyVisitThread(emailLessor, emailRenter,
+                            visitBean.getUsernameLessor(), visitBean.getIdApartment(), visitBean.getVisitDate(),
+                            visitBean.getVisitTime(), visitBean.getModDate(), visitBean.getModTime(), true);
+                    Thread thread = new Thread(t);
+                    thread.start();
                 }
                 else{
-                    mailer.sendModifyVisitEmail(emailRenter, emailLessor, visitBean.getUsernameRenter(),
-                            visitBean.getIdApartment(), visitBean.getVisitDate(), visitBean.getVisitTime(),
-                            visitBean.getModDate(), visitBean.getModTime(), false);
+                    MailModifyVisitThread t = new MailModifyVisitThread(emailRenter, emailLessor,
+                            visitBean.getUsernameRenter(), visitBean.getIdApartment(), visitBean.getVisitDate(),
+                            visitBean.getVisitTime(), visitBean.getModDate(), visitBean.getModTime(), false);
+                    Thread thread = new Thread(t);
+                    thread.start();
                 }
-                return 1;
+                return true;
             }
         }
-        return -1;
+        return false;
     }
 }

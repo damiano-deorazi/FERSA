@@ -1,8 +1,6 @@
 package fersa.fx_controller;
 
-import fersa.*;
 import fersa.bean.VisitBean;
-import fersa.bean.UserBean;
 import fersa.grasp_controller.DeleteVisitController;
 import fersa.model.ApartmentLessorVisit;
 import javafx.collections.FXCollections;
